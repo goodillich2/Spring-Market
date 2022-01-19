@@ -8,7 +8,7 @@ public class SpringMarketApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(SpringMarketApplication.class, args);
-        System.out.println("kek");
+        System.out.println("kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111kek111111111111");
     }
 
 }
