@@ -12,16 +12,17 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class ProductService {
-    @Autowired
-    private final ProductRepository productRepository;
 
-    public Product findById(Long id){
+    @Autowired
+    private  ProductRepository productRepository;
+
+    public Product getById(Long id){
         return productRepository.getById(id);
     }
-    public List<Product> findAll(){
+    public List<Product> getAll(){
         return productRepository.findAll();
     }
-    public Product saveProduct(Product user){
+    public Product save(Product user){
         return productRepository.save(user);
     }
     public void deleteById(Long id){
