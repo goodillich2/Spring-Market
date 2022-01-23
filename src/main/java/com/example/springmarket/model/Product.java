@@ -9,7 +9,7 @@ import org.springframework.lang.NonNull;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "product", schema = "market")
+@Table(name = "product")
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class Product {
@@ -17,6 +17,10 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    Category category;
 
     @NotNull
     @Basic(optional = false)

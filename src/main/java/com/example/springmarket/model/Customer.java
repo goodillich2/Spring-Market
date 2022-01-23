@@ -2,13 +2,14 @@ package com.example.springmarket.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "customer")
 @Data
-@AllArgsConstructor
+@AllArgsConstructor @NoArgsConstructor
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
