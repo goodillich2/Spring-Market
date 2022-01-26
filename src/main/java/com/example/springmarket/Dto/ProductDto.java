@@ -1,32 +1,21 @@
-package com.example.springmarket.model;
+package com.example.springmarket.Dto;
 
 import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import org.springframework.lang.NonNull;
 
-import javax.persistence.*;
 
-@Entity
-@Table(name = "products")
-public class Product {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDto {
+    // for create it can be optional
+    // for update we need the id
     private Integer id;
-
     private @NotNull String name;
     private @NotNull String imageURL;
     private @NotNull double price;
     private @NotNull String description;
+    private @NotNull Integer categoryId;
 
 
-    // Many to one relationship
-    @ManyToOne
-    @JoinColumn(name = "category_id")
-    Category category;
-
+    public ProductDto() {
+    }
 
     public String getName() {
         return name;
@@ -60,12 +49,12 @@ public class Product {
         this.description = description;
     }
 
-    public Category getCategory() {
-        return category;
+    public Integer getCategoryId() {
+        return categoryId;
     }
 
-    public void setCategory(Category category) {
-        this.category = category;
+    public void setCategoryId(Integer categoryId) {
+        this.categoryId = categoryId;
     }
 
     public Integer getId() {
@@ -75,9 +64,4 @@ public class Product {
     public void setId(Integer id) {
         this.id = id;
     }
-
-    public int getCategoryId() {
-         return category.getId();
-    }
-
 }
