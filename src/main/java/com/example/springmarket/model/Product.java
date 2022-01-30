@@ -1,5 +1,6 @@
 package com.example.springmarket.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class Product {
 
 
     // Many to one relationship
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "category_id")
     Category category;

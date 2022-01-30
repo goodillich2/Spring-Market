@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -18,4 +19,13 @@ public class UserService {
         return response;
     }
     public List<User> getAll(){return userRepository.findAll();}
+
+    public User findByEmail(String userEmail) throws Exception {
+        Optional<User> optionalUser = userRepository.findByEmail(userEmail);
+        if (!optionalUser.isPresent()) {
+            throw new Exception("user not present");
+        }
+        User user = optionalUser.get();
+        return user;
+    }
 }

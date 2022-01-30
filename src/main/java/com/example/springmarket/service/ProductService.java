@@ -63,4 +63,13 @@ public class ProductService {
         product.setPrice(productDto.getPrice());
         productRepository.save(product);
     }
+
+    public Product findById(Integer productId) throws Exception {
+        Optional<Product> optionalProduct =  productRepository.findById(productId);
+        if (!optionalProduct.isPresent()) {
+            throw new Exception("product does not exist");
+        }
+        Product product = optionalProduct.get();
+        return product;
+    }
 }
