@@ -2,6 +2,7 @@ package com.example.springmarket.controller2;
 
 
 import com.example.springmarket.Dto.ProductDto;
+import com.example.springmarket.Dto.cart.AddToCartDto;
 import com.example.springmarket.model.Category;
 import com.example.springmarket.repository.CategoryRepository;
 import com.example.springmarket.service.ProductService;
@@ -37,6 +38,7 @@ public class ProductController {
         List<ProductDto> products = productService.getAllProductsFromOneCategory(categoryId);
         model.addAttribute("products", products);
         model.addAttribute("categoryId", categoryId);
+        model.addAttribute("AddToCartDto", new AddToCartDto());
         System.out.println(products);
         return "products";
     }

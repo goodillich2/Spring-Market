@@ -19,7 +19,7 @@
                         <a class="nav-link" href="/about">About us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/cart">Cart</a>
+                        <a class="nav-link" href="/cart/">Cart</a>
                     </li>
                 </ul>
 
@@ -46,7 +46,6 @@
 
 
 <br><br><br>
-
 <div th:each="product: ${products}">
 
     <img th:src=${product.imageURL}  alt="..."  width="200px">
@@ -55,18 +54,30 @@
     <p th:text="${product.price}"></p>
     <p th:text="${product.description}"></p>
 
-   <!-- <form id="add" th:action="@{/cart/add}" method="post" th:object="${product}">
-        <input id="productId" th:field="*{id}" type="hidden"/>
+    <!--<form id="add" th:action="@{/cart/add}" method="post" th:object="${AddToCartDto}">
 
         <label for="id">id</label>
         <input type="text" th:field="*{id}" id="id"/>
 
         <label for="quantity">quantity:</label>
         <input type="text" th:field="*{quantity}" id="quantity"/>
+        <input type="hidden" th:field="*{productId}" value="1"/>
 
         <button type="submit" value="Add to cart">Add to cart</button>
+
+        <input type="hidden" th:value="${product.id}" name="productId" />
     </form>-->
 
+    <form id="add" th:action="@{/cart/add}" method="post" >
+
+        <input type="hidden" th:value="${product.id}" name="productId" />
+
+
+        <label for="quantity">quantity:</label>
+        <input type="text"  id="quantity" name="quantity"/>
+
+        <button type="submit" value="Add to cart">Add to cart</button>
+    </form>
 
 
 

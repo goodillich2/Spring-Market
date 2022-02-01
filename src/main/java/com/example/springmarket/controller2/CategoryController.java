@@ -41,8 +41,9 @@ public class CategoryController {
         System.out.println(currentUserName);
         //получаем обьект юзеря по имени ()
         User user = userService.findByEmail(currentUserName);
-        //Сохраняем entity SessionId (authSessionRep.save( User user, String Session ))
-        authSessionIdService.save(user,sessionId);
+        //Сохраняем entity SessionId если это в первый раз(authSessionRep.save( User user, String Session ))
+        if(!authSessionIdService.findBySessionId(sessionId))
+             authSessionIdService.save(user,sessionId);
 
         List<Category> categoryList = categoryService.getAll();
         model.addAttribute("categoryList", categoryList);

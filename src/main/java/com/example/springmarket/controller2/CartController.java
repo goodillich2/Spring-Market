@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -29,7 +30,10 @@ public class CartController {
 
     // post cart api
     @PostMapping("/add")
-    public String  addToCart(@ModelAttribute("addToCartDto") AddToCartDto addToCartDto, HttpSession session) throws Exception {
+    public String  addToCart(@RequestParam("quantity") Integer quantity, @RequestParam("productId") Integer productId,  HttpSession session) throws Exception {
+        AddToCartDto addToCartDto = new AddToCartDto(productId,quantity);
+        System.out.println(addToCartDto);
+
 
         // find the user
         String sessionId = session.getId();
@@ -43,8 +47,8 @@ public class CartController {
 
 
     // get all cart items for a user
-   /* @GetMapping("/")
-    public ResponseEntity<CartDto> getCartItems(HttpSession session) throws Exception {
+    @GetMapping("/")
+    public String getCartItems(HttpSession session, Model model) throws Exception {
         // find the user
         String sessionId = session.getId();
         User user = authSessionIdService.getUser(sessionId);
@@ -52,25 +56,24 @@ public class CartController {
         // get cart items
 
         CartDto cartDto = cartService.listCartItems(user);
-        return new ResponseEntity<>(cartDto, HttpStatus.OK);
+        model.addAttribute("cartDto", cartDto);
+        return "cartItems";
     }
 
     // delete a cart item for a user
 
-    @DeleteMapping("/delete/{cartItemId}")
-    public ResponseEntity<ApiResponse> deleteCartItem(@PathVariable("cartItemId") Integer itemId, HttpSession session) throws Exception {
+    @PostMapping("/delete/{cartItemId}")
+    public String deleteCartItem(@PathVariable("cartItemId") Integer itemId, HttpSession session) throws Exception {
 
         // find the user
         String sessionId = session.getId();
         User user = authSessionIdService.getUser(sessionId);
 
 
-
         cartService.deleteCartItem(itemId, user);
 
-        return new ResponseEntity<>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
+        return "redirect:/cart/";
 
     }
-*/
 }
 

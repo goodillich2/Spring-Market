@@ -33,4 +33,12 @@ public class AuthSessionIdService {
         authSessionId.setUser(user);
         authSessionIdRepository.save(authSessionId);
     }
+
+    public boolean findBySessionId(String sessionId) {
+        AuthSessionId authSessionId =  authSessionIdRepository.findBySessionId(sessionId);
+        if(authSessionId == null){
+            return false;
+        }
+        return true;
+    }
 }
