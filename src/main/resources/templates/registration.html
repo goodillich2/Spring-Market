@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Registration Customer</title>
+</head>
+<body>
+<div class="container">
+    <form class="form-signup" method="post" action="/auth/registration">
+        <h2 class="form-signup-heading">Registration</h2>
+        <p>
+            <label for="first_name">First Name</label>
+            <input type="text" id="first_name" name="firstName" class="form-control" placeholder="first name" required>
+        </p>
+
+        <p>
+            <label for="last_name">Last name</label>
+            <input type="text" id="last_name" name="lastName" class="form-control" placeholder="last name" required>
+        </p>
+
+        <p>
+            <label for="Email">Email</label>
+            <input type="text" id="Email" name="Email" class="form-control" placeholder="Email" required>
+        </p>
+        <p>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" class="form-control" placeholder="Password" required>
+        </p>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign up</button>
+    </form>
+</div>
+</body>
+</html>

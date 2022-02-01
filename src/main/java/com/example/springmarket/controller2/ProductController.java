@@ -1,10 +1,8 @@
-/*
-package com.example.springmarket.controller;
+package com.example.springmarket.controller2;
 
 
 import com.example.springmarket.Dto.ProductDto;
 import com.example.springmarket.model.Category;
-import com.example.springmarket.model.Product;
 import com.example.springmarket.repository.CategoryRepository;
 import com.example.springmarket.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/product")
 public class ProductController {
     @Autowired
@@ -34,10 +32,13 @@ public class ProductController {
         return "product has been added";
     }
 
-    @GetMapping("/")
-    public List<ProductDto> getProducts() {
-        List<ProductDto> products = productService.getAllProducts();
-        return products;
+    @GetMapping("/{categoryId}")
+    public String  getProductsFromOneCategory(@PathVariable int categoryId, Model model) {
+        List<ProductDto> products = productService.getAllProductsFromOneCategory(categoryId);
+        model.addAttribute("products", products);
+        model.addAttribute("categoryId", categoryId);
+        System.out.println(products);
+        return "products";
     }
 
     // create an api to edit the product
@@ -55,5 +56,4 @@ public class ProductController {
 
 }
 
-*/
 

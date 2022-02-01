@@ -72,4 +72,14 @@ public class ProductService {
         Product product = optionalProduct.get();
         return product;
     }
+
+    public List<ProductDto> getAllProductsFromOneCategory(int category_id) {
+        List<Product> allProducts = productRepository.getAllByCategory_Id(category_id);
+
+        List<ProductDto> productDtos = new ArrayList<>();
+        for(Product product: allProducts) {
+            productDtos.add(getProductDto(product));
+        }
+        return productDtos;
+    }
 }

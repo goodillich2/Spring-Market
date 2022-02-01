@@ -1,5 +1,4 @@
-/*
-package com.example.springmarket.controller;
+package com.example.springmarket.controller2;
 
 
 import com.example.springmarket.Dto.cart.AddToCartDto;
@@ -11,11 +10,12 @@ import com.example.springmarket.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/cart")
 public class CartController {
 
@@ -29,7 +29,7 @@ public class CartController {
 
     // post cart api
     @PostMapping("/add")
-    public ResponseEntity<ApiResponse> addToCart(@RequestBody AddToCartDto addToCartDto, HttpSession session) throws Exception {
+    public String  addToCart(@ModelAttribute("addToCartDto") AddToCartDto addToCartDto, HttpSession session) throws Exception {
 
         // find the user
         String sessionId = session.getId();
@@ -38,12 +38,12 @@ public class CartController {
 
         cartService.addToCart(addToCartDto, user);
 
-        return new ResponseEntity<>(new ApiResponse(true, "Added to cart"), HttpStatus.CREATED);
+        return "redirect:/category/list";
     }
 
 
     // get all cart items for a user
-    @GetMapping("/")
+   /* @GetMapping("/")
     public ResponseEntity<CartDto> getCartItems(HttpSession session) throws Exception {
         // find the user
         String sessionId = session.getId();
@@ -71,7 +71,6 @@ public class CartController {
         return new ResponseEntity<>(new ApiResponse(true, "Item has been removed"), HttpStatus.OK);
 
     }
-
+*/
 }
 
-*/

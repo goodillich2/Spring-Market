@@ -1,14 +1,15 @@
-package com.example.springmarket.controller;
+package com.example.springmarket.controller2;
 
-import com.example.springmarket.model.user.AuthSessionId;
+import com.example.springmarket.model.user.Role;
+import com.example.springmarket.model.user.Status;
 import com.example.springmarket.model.user.User;
 import com.example.springmarket.service.AuthSessionIdService;
 import com.example.springmarket.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 
@@ -21,6 +22,8 @@ public class AuthController {
 
     @Autowired
     AuthSessionIdService authSessionIdService;
+
+
 
     @GetMapping("/login")
     public String getLoginPage() {
@@ -41,4 +44,23 @@ public class AuthController {
 
         return "success";
     }
+
+    @GetMapping("/registration")
+    public String getRegistrationPage(){
+        return "registration";
+    }
+
+    @PostMapping("/registration")
+    public String getRegistration(@ModelAttribute("newPerson") User user, Model model ){
+        if (userService.getUsersFromDB(user)) {
+            model.addAttribute("userNameError", "Користувач з таким логіном вже існує в БД");
+            return "registration";
+        }
+        user.setRole(Role.USER);
+        user.setStatus(Status.ACTIVE);
+        userService.save(user);
+        return "redirect:login";
+    }
+
+
 }

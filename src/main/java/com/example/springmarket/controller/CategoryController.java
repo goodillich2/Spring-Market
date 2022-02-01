@@ -1,4 +1,4 @@
-package com.example.springmarket.controller;
+/*package com.example.springmarket.controller;
 
 import com.example.springmarket.model.Category;
 import com.example.springmarket.service.CategoryService;
@@ -33,4 +33,4 @@ public class CategoryController {
         categoryService.updateById(categoryId, category);
         return "category"+ Integer.toString(categoryId)+" was updated";
     }
-}
+}*/

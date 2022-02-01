@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<html lang="en" xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+</head>
+
+<body>
+<heder>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/category/list">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/about">About us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cart">Cart</a>
+                </li>
+            </ul>
+
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link" href="/admins">ADMIN TOOLS</a>
+                </li>
+            </ul>
+
+            </ul>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск">
+                <button class="btn btn-outline-success" type="submit">Поиск</button>
+                <authorize access="isAuthenticated()">
+                    <a class="nav-link" href="/auth/login">Login</a>
+                </authorize>
+                <a class="nav-link" href="/auth/logout">logout</a>
+            </form>
+        </div>
+    </div>
+</nav>
+</heder>
+
+
+
+<br><br><br>
+
+
+
+
+<div th:each="category: ${categoryList}">
+
+    <img th:src="${category.imageUrl}"  alt="..."  width="200px">
+    <p><a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a></p>
+    <p th:text="${category.description}"></p>
+    <br><br><br><br><br>
+
+</div>
+
+
+
+</body>
+</html>
