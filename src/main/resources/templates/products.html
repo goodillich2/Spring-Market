@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -45,14 +45,15 @@
 
 
 
-<br><br><br>
-<div th:each="product: ${products}">
 
-    <img th:src=${product.imageURL}  alt="..."  width="200px">
-    <p th:text="${product.name}"></p>
-    <!--<a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a>-->
-    <p th:text="${product.price}"></p>
-    <p th:text="${product.description}"></p>
+<div th:each="product: ${products}" style="background: #e9c1e4; padding:100px;  padding-top: 50px" >
+
+        <img th:src=${product.imageURL}  alt="..."  width="400px" >
+
+        <p th:text="${product.name}" style="font-size: 20pt" ></p>
+
+    <b style="font-size: 15pt">PRICE:</b>  <p th:text="${product.price}" style="font-size: 15pt"></p>
+      <b style="font-size: 15pt">DESCRIPTION:</b> <p th:text="${product.description}" style="font-size: 13pt"></p>
 
     <!--<form id="add" th:action="@{/cart/add}" method="post" th:object="${AddToCartDto}">
 
@@ -67,16 +68,17 @@
 
         <input type="hidden" th:value="${product.id}" name="productId" />
     </form>-->
-
     <form id="add" th:action="@{/cart/add}" method="post" >
+
+        <input type="hidden" th:value="${categoryId}" name="categoryId" />
 
         <input type="hidden" th:value="${product.id}" name="productId" />
 
 
-        <label for="quantity">quantity:</label>
+        <label for="quantity"><b  style="font-size: 15pt">Quantity</b></label>
         <input type="text"  id="quantity" name="quantity"/>
 
-        <button type="submit" value="Add to cart">Add to cart</button>
+        <button type="submit" value="Add to cart" STYLE="color: wheat; background: black;">Add to cart</button>
     </form>
 
 
@@ -93,8 +95,7 @@
         <input type="submit" class="btn btn-primary" value="Купити Зараз">
 
     </form>-->
-    <br><br><br><br><br>
-
+    <hr>
 </div>
 
 

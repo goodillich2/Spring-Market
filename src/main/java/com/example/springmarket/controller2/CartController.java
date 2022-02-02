@@ -30,7 +30,7 @@ public class CartController {
 
     // post cart api
     @PostMapping("/add")
-    public String  addToCart(@RequestParam("quantity") Integer quantity, @RequestParam("productId") Integer productId,  HttpSession session) throws Exception {
+    public String  addToCart(@RequestParam("categoryId") Integer categoryId, @RequestParam("quantity") Integer quantity, @RequestParam("productId") Integer productId,  HttpSession session) throws Exception {
         AddToCartDto addToCartDto = new AddToCartDto(productId,quantity);
         System.out.println(addToCartDto);
 
@@ -42,7 +42,7 @@ public class CartController {
 
         cartService.addToCart(addToCartDto, user);
 
-        return "redirect:/category/list";
+        return "redirect:/product/"+categoryId;
     }
 
 
