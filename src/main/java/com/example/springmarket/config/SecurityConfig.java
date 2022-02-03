@@ -67,16 +67,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return daoAuthenticationProvider;
     }
 
+
+
     @Override
-    public void configure(WebSecurity web) throws Exception {
-        web.ignoring()
-                .antMatchers("/scripts/**")
-                .antMatchers("/styles/**")
-                .antMatchers("/images/**")
-                .antMatchers("/fonts/**");
+    public void configure(WebSecurity web) {
+        web.ignoring().antMatchers(
 
+                "resources/templates/**",
+                "/css/**",
+                "/js/**",
+                "/fonts/**",
+                "/images/**"
+        );
     }
-
 
 }
 

@@ -4,9 +4,42 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        button{
+            border: 1px solid;
+            border-radius: 5px;
+            background-color: #d3d3d3;
+            padding: 7px 7px;
+        }
+
+        html, body{
+            padding: 0px;
+            margin: 0px;
+            background: #e9c1e4;
+        }
+
+        .menu {
+            max-width: 100%;
+            height: auto;
+            overflow:hidden
+        }
+        .frame{
+            float:left;
+            width: 50%;
+            height: 100%;
+
+        }
+        .input{
+            width: 200px;
+            position: relative;
+            left: 42%;
+            transform: translate(-50%, 0);
+        }
+    </style>
 </head>
 
+<body bgcolor="#fa8e47">
 <heder>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
         <div class="container-fluid">
@@ -44,42 +77,43 @@
 </heder>
 
 
+<div class="menu">
+    <div class="frame" th:each="cart: ${cartDto.cartItems}" style=" padding:100px;  padding-top: 50px">
 
-<div th:each="cart: ${cartDto.cartItems}">
-
-    <div th:each="product: ${cart.product}">
-        <img th:src=${product.imageURL}  alt="..."  width="200px">
-        <p th:text="${product.name}"></p>
-        <!--<a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a>-->
-        price: <p th:text="${product.price}"></p>
-        description:<p th:text="${product.description}"></p>
+        <div th:each="product: ${cart.product}">
+            <img th:src=${product.imageURL}  alt="..."  width="200px">
+            <p th:text="${product.name}" style="font-size: 20pt"></p>
+            <!--<a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a>-->
+            <b style="font-size: 15pt">PRICE:</b>  <p th:text="${product.price}"  style="font-size: 15pt"></p>
+            <b style="font-size: 15pt">DESCRIPTION:</b><p th:text="${product.description}" style="font-size: 13pt"></p>
 
 
+        </div>
+
+
+        <b style="font-size: 13pt; border: 1px red">QUANTITY:</b><p th:text="${cart.quantity}"></p>
+
+        <form th:method="POST" th:action="@{/cart/delete/{cartItemId}(cartItemId = ${cart.getId()})}">
+            <input type="submit" value="Delete" STYLE="color: wheat; background: black;"/>
+        </form>
+
+        <!--<img th:src="${category.imageUrl}"  alt="..."  width="200px">
+        <p><a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a></p>
+        <p th:text="${category.description}"></p>-->
+        <hr>
     </div>
-
-
-    quantity:<p th:text="${cart.quantity}"></p>
-
-    <form th:method="POST" th:action="@{/cart/delete/{cartItemId}(cartItemId = ${cart.getId()})}">
-        <input type="submit" value="Delete"/>
-    </form>
-
-    <!--<img th:src="${category.imageUrl}"  alt="..."  width="200px">
-    <p><a th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a></p>
-    <p th:text="${category.description}"></p>-->
-    <br><br><br>
-
 </div>
 
-<i>Total cost: </i> <i th:text="${cartDto.totalCost}"></i>
+<div style="  margin-top: 30pt; padding-bottom: 20pt">
+    <b class="input" style="font-size: 15pt">TOTAL COST:</b> <I class="input" STYLE="font-size: 20px" th:text="${cartDto.totalCost}"></I>
 
-<form id="add" th:action="@{/cart/add}" method="post" >
+    <form id="add" th:action="@{/cart/add}" method="post" >
 
-    <input type="hidden" th:value="${cartDto.totalCost}" name="totalCost" />
+        <input type="hidden" th:value="${cartDto.totalCost}" name="totalCost" />
 
-    <button type="submit" value="Confirm">Confirm</button>
-</form>
-
+        <button style="width: 200px;position: relative;left: 50%;transform: translate(-50%, 0);" type="submit" value="Confirm">Confirm</button>
+    </form>
+</div>
 
 <!--<form th:method="POST" th:action="/">
     <button type="submit" value="Confirm">Confirm</button>
