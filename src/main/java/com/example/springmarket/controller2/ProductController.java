@@ -56,6 +56,20 @@ public class ProductController {
         return "product has been updated";
     }
 
+    @GetMapping("/list")
+    public String  getAllProducts( Model model) {
+        List<ProductDto> products = productService.getAllProducts();
+        model.addAttribute("products", products);
+        model.addAttribute("AddToCartDto", new AddToCartDto());
+        return "adminProducts";
+    }
+
+    @PostMapping("/delete/{id}")
+    public String deleteProduct(@PathVariable("id") int id){
+        productService.deleteProduct(id);
+        return "redirect:/product/list";
+    }
+
 }
 
 

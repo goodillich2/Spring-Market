@@ -73,7 +73,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) {
         web.ignoring().antMatchers(
 
-                "resources/templates/**",
+                "/static/**",
                 "/css/**",
                 "/js/**",
                 "/fonts/**",

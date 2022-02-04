@@ -1,103 +1,121 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
+    <link href="css/footer.css" rel="stylesheet">
     <style>
-        html, body {
+        html, body{
             padding: 0px;
             margin: 0px;
-            background: #e9c1e4;
+            background:  #e9c1e4;
+        }
+
+        .menu {
+            max-width: 100%;
+            height: auto;
+            overflow:hidden
+        }
+        .frame{
+            float:left;
+            width: 30%;
+            height: 100%;
+            margin: 22px;
+            border: 1px solid black;
+            background: wheat;
+        }
+        .pad{
+            padding: 10pt;
+        }
+
+        /* Main Footer */
+        footer .main-footer{ padding: 20px 0; background: #252525;}
+        footer ul{ padding-left: 0; list-style: none;}
+
+        /* Copy Right Footer */
+        .footer-copyright { background: #222; padding: 5px 0;}
+        .footer-copyright .logo { display: inherit;}
+        .footer-copyright nav { float: right; margin-top: 5px;}
+        .footer-copyright nav ul { list-style: none; margin: 0; padding: 0;}
+        .footer-copyright nav ul li { border-left: 1px solid #505050; display: inline-block; line-height: 12px; margin: 0; padding: 0 8px;}
+        .footer-copyright nav ul li a{ color: #969696;}
+        .footer-copyright nav ul li:first-child { border: medium none; padding-left: 0;}
+        .footer-copyright p { color: #969696; margin: 2px 0 0;}
+
+        /* Footer Top */
+        .footer-top{ background: #252525; padding-bottom: 30px; margin-bottom: 30px; border-bottom: 3px solid #222;}
+
+        /* Footer transparent */
+        footer.transparent .footer-top, footer.transparent .main-footer{ background: transparent;}
+        footer.transparent .footer-copyright{ background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3) ;}
+
+        /* Footer light */
+        footer.light .footer-top{ background: #f9f9f9;}
+        footer.light .main-footer{ background: #f9f9f9;}
+        footer.light .footer-copyright{ background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3) ;}
+
+        /* Footer 4 */
+        .footer- .logo { display: inline-block;}
+
+        /*====================
+          Widgets
+        ====================== */
+        .widget{ padding: 20px; margin-bottom: 40px;}
+        .widget.widget-last{ margin-bottom: 0px;}
+        .widget.no-box{ padding: 0; background-color: transparent; margin-bottom: 40px;
+            box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none;}
+        .widget.subscribe p{ margin-bottom: 18px;}
+        .widget li a{ color: #ff8d1e;}
+        .widget li a:hover{ color: #4b92dc;}
+        .widget-title {margin-bottom: 20px;}
+        .widget-title span {background: #839FAD none repeat scroll 0 0;display: block; height: 1px;margin-top: 25px;position: relative;width: 20%;}
+        .widget-title span::after {background: inherit;content: "";height: inherit; position: absolute;top: -4px;width: 50%;}
+        .widget-title.text-center span,.widget-title.text-center span::after {margin-left: auto;margin-right:auto;left: 0;right: 0;}
+        .widget .badge{ float: right; background: #7f7f7f;}
+
+        .typo-light h1,
+        .typo-light h2,
+        .typo-light h3,
+        .typo-light h4,
+        .typo-light h5,
+        .typo-light h6,
+        .typo-light p,
+        .typo-light div,
+        .typo-light span,
+        .typo-light small{ color: #fff;}
+
+        ul.social-footer2 { margin: 0;padding: 0; width: auto;}
+        ul.social-footer2 li {display: inline-block;padding: 0;}
+        ul.social-footer2 li a:hover {background-color:#ff8d1e;}
+        ul.social-footer2 li a {display: block; height:30px;width: 30px;text-align: center;}
+        .btn{background-color: #ff8d1e; color:#fff;}
+        .btn:hover, .btn:focus, .btn.active {background: #4b92dc;color: #fff;
+            -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            -ms-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            -o-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            -webkit-transition: all 250ms ease-in-out 0s;
+            -moz-transition: all 250ms ease-in-out 0s;
+            -ms-transition: all 250ms ease-in-out 0s;
+            -o-transition: all 250ms ease-in-out 0s;
+            transition: all 250ms ease-in-out 0s;
 
         }
-            /* Main Footer */
-            footer .main-footer{ padding: 20px 0; background: #252525;}
-            footer ul{ padding-left: 0; list-style: none;}
+        a{
+            text-decoration:none;
+        }
 
-            /* Copy Right Footer */
-            .footer-copyright { background: #222; padding: 5px 0;}
-            .footer-copyright .logo { display: inherit;}
-            .footer-copyright nav { float: right; margin-top: 5px;}
-            .footer-copyright nav ul { list-style: none; margin: 0; padding: 0;}
-            .footer-copyright nav ul li { border-left: 1px solid #505050; display: inline-block; line-height: 12px; margin: 0; padding: 0 8px;}
-            .footer-copyright nav ul li a{ color: #969696;}
-            .footer-copyright nav ul li:first-child { border: medium none; padding-left: 0;}
-            .footer-copyright p { color: #969696; margin: 2px 0 0;}
-
-            /* Footer Top */
-            .footer-top{ background: #252525; padding-bottom: 30px; margin-bottom: 30px; border-bottom: 3px solid #222;}
-
-            /* Footer transparent */
-            footer.transparent .footer-top, footer.transparent .main-footer{ background: transparent;}
-            footer.transparent .footer-copyright{ background: none repeat scroll 0 0 rgba(0, 0, 0, 0.3) ;}
-
-            /* Footer light */
-            footer.light .footer-top{ background: #f9f9f9;}
-            footer.light .main-footer{ background: #f9f9f9;}
-            footer.light .footer-copyright{ background: none repeat scroll 0 0 rgba(255, 255, 255, 0.3) ;}
-
-            /* Footer 4 */
-            .footer- .logo { display: inline-block;}
-
-            /*====================
-              Widgets
-            ====================== */
-            .widget{ padding: 20px; margin-bottom: 40px;}
-            .widget.widget-last{ margin-bottom: 0px;}
-            .widget.no-box{ padding: 0; background-color: transparent; margin-bottom: 40px;
-                box-shadow: none; -webkit-box-shadow: none; -moz-box-shadow: none; -ms-box-shadow: none; -o-box-shadow: none;}
-            .widget.subscribe p{ margin-bottom: 18px;}
-            .widget li a{ color: #ff8d1e;}
-            .widget li a:hover{ color: #4b92dc;}
-            .widget-title {margin-bottom: 20px;}
-            .widget-title span {background: #839FAD none repeat scroll 0 0;display: block; height: 1px;margin-top: 25px;position: relative;width: 20%;}
-            .widget-title span::after {background: inherit;content: "";height: inherit; position: absolute;top: -4px;width: 50%;}
-            .widget-title.text-center span,.widget-title.text-center span::after {margin-left: auto;margin-right:auto;left: 0;right: 0;}
-            .widget .badge{ float: right; background: #7f7f7f;}
-
-            .typo-light h1,
-            .typo-light h2,
-            .typo-light h3,
-            .typo-light h4,
-            .typo-light h5,
-            .typo-light h6,
-            .typo-light p,
-            .typo-light div,
-            .typo-light span,
-            .typo-light small{ color: #fff;}
-
-            ul.social-footer2 { margin: 0;padding: 0; width: auto;}
-            ul.social-footer2 li {display: inline-block;padding: 0;}
-            ul.social-footer2 li a:hover {background-color:#ff8d1e;}
-            ul.social-footer2 li a {display: block; height:30px;width: 30px;text-align: center;}
-            .btn{background-color: #ff8d1e; color:#fff;}
-            .btn:hover, .btn:focus, .btn.active {background: #4b92dc;color: #fff;
-                -webkit-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-                -moz-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-                -ms-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-                -o-box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-                -webkit-transition: all 250ms ease-in-out 0s;
-                -moz-transition: all 250ms ease-in-out 0s;
-                -ms-transition: all 250ms ease-in-out 0s;
-                -o-transition: all 250ms ease-in-out 0s;
-                transition: all 250ms ease-in-out 0s;
-
-            }
-            a{
-                text-decoration:none;
-            }
     </style>
 </head>
 
-
 <body>
-
-<heder  style="background-color: black; box-shadow: white">
-    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark" style="background: black">
-        <div class="container-fluid" >
+<heder>
+    <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
+        <div class="container-fluid">
             <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
@@ -111,16 +129,16 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="hasAuthority('write')">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admins">ADMIN TOOLS</a>
+                        <a class="nav-link" href="/auth/admin">ADMIN TOOLS</a>
                     </li>
                 </ul>
 
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск">
-                    <button class="btn btn-outline-success" type="submit">Поиск</button>
+                    <button class="btn btn-outline-success" type="submit">Search</button>
                     <authorize access="isAuthenticated()">
                         <a class="nav-link" href="/auth/login">Login</a>
                     </authorize>
@@ -134,32 +152,23 @@
 
 
 
-<div th:each="product: ${products}" style="background: #e9c1e4; padding:100px;  padding-top: 50px" >
-
-        <img th:src=${product.imageURL}  alt="..."  width="400px" >
-
-        <p th:text="${product.name}" style="font-size: 20pt" ></p>
-
-    <b style="font-size: 15pt">PRICE:</b>  <p th:text="${product.price}" style="font-size: 15pt"></p>
-      <b style="font-size: 15pt">DESCRIPTION:</b> <p th:text="${product.description}" style="font-size: 13pt"></p>
 
 
-    <form id="add" th:action="@{/cart/add}" method="post" >
 
-        <input type="hidden" th:value="${categoryId}" name="categoryId" />
-
-        <input type="hidden" th:value="${product.id}" name="productId" />
-
-
-        <label for="quantity"><b  style="font-size: 15pt">Quantity</b></label>
-        <input type="text"  id="quantity" name="quantity"/>
-
-        <button type="submit" value="Add to cart" STYLE="color: wheat; background: black;">Add to cart</button>
+<!--<p style="text-align: center;font-size: 25pt;background: #e9c1e4;"><b><i>Top categories</i></b></p>-->
+<div class="menu">
+    <form th:method="POST" >
+        <input type="submit" value="Add new category" STYLE="color: wheat; background: black;"/>
     </form>
-    <hr>
+    <div th:each="category: ${categoryList}"  class="frame">
+        <img  th:src="${category.imageUrl}"  alt="..."   height="250" width="430" th:href="@{/product/{categoryId}(categoryId=${category.getId()})}">
+        <p class="pad" style="font-size: 18pt"><a style="text-decoration: none" th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a></p>
+        <b class="pad" style="font-size: 12pt">DESCRIPTION:</b> <p class="pad" th:text="${category.description}" style="font-size: 15pt"></p>
+        <form th:method="POST" th:action="@{/category/delete/{id}(id = ${category.getId()})}">
+            <input type="submit" value="Delete" STYLE="color: wheat; background: black;" />
+        </form>
+    </div>
 </div>
-
-
 
 <div>
     <footer id="footer" class="footer-1">

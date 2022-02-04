@@ -82,4 +82,8 @@ public class ProductService {
         }
         return productDtos;
     }
+
+    public void deleteProduct(int id){
+        productRepository.deleteById(id);
+    }
 }

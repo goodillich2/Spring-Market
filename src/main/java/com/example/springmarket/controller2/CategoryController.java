@@ -59,4 +59,18 @@ public class CategoryController {
         categoryService.updateById(categoryId, category);
         return "category"+ Integer.toString(categoryId)+" was updated";
     }
+
+    @GetMapping("admin/list")
+    public String getAdminList(Model model, HttpSession session) throws Exception {
+        List<Category> categoryList = categoryService.getAll();
+        model.addAttribute("categoryList", categoryList);
+        return "adminCategories";
+
+    }
+
+    @PostMapping("delete/{id}")
+    public String deleteCategory(@PathVariable("id") int id){
+        categoryService.deleteById(id);
+        return "redirect:/category/admin/list";
+    }
 }

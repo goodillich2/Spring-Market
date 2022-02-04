@@ -62,5 +62,10 @@ public class AuthController {
         return "redirect:login";
     }
 
+    @GetMapping("/admin")
+    public String getAdminPage(){
+        return "adminPage";
+    }
+
 
 }
