@@ -26,10 +26,17 @@ public class CategoryController {
     @Autowired
     AuthSessionIdService authSessionIdService;
 
+
+    @GetMapping("/create")
+    public String createCategory(){
+        return "AddCategoryForm";
+    }
+
     @PostMapping("/create")
-    public String createCategory(@RequestBody Category category){
+    public String createCategory(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("imageUrl") String imageUrl ){
+        Category category = new Category(name, description, imageUrl);
         categoryService.save(category);
-        return "a new category created";
+        return "redirect:/category/admin/list";
     }
 
     @GetMapping("/list")
@@ -51,13 +58,25 @@ public class CategoryController {
 
     }
 
-    @PostMapping("/update/{categoryId}")
-    public String updateCategory(@RequestBody Category category, @PathVariable("categoryId") int categoryId){
+    @GetMapping("/update/{categoryId}")
+    public String updateCategory(@PathVariable("categoryId") int categoryId, Model model){
         if(!categoryService.findById(categoryId)){
             return "Category does not exist";
         }
+        Category category = categoryService.getById(categoryId);
+        model.addAttribute("category", category);
+        return "UpdateCategoryForm";
+    }
+
+    @PostMapping("/update/{categoryId}")
+    public String updateCategory(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("imageUrl") String imageUrl, @PathVariable("categoryId") int categoryId){
+        Category category = new Category(categoryId, name, description, imageUrl);
+        if(!categoryService.findById(categoryId)){
+            return "Category does not exist";
+        }
+        System.out.println(category);
         categoryService.updateById(categoryId, category);
-        return "category"+ Integer.toString(categoryId)+" was updated";
+        return "redirect:/category/admin/list";
     }
 
     @GetMapping("admin/list")

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:padding="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
         html, body {
             padding: 0px;
             margin: 0px;
-            background: #e9c1e4;
+            background: white;
 
         }
             /* Main Footer */
@@ -111,9 +111,9 @@
                     </li>
                 </ul>
 
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="hasAuthority('write')">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admins">ADMIN TOOLS</a>
+                        <a class="nav-link" href="/auth/admin">ADMIN TOOLS</a>
                     </li>
                 </ul>
 
@@ -134,7 +134,7 @@
 
 
 
-<div th:each="product: ${products}" style="background: #e9c1e4; padding:100px;  padding-top: 50px" >
+<div th:each="product: ${products}" style=" padding:100px;  padding-top: 50px" >
 
         <img th:src=${product.imageURL}  alt="..."  width="400px" >
 

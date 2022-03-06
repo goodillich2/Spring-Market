@@ -11,7 +11,7 @@
         html, body{
             padding: 0px;
             margin: 0px;
-            background:  #e9c1e4;
+            background:  white;
         }
 
         .menu {
@@ -29,6 +29,12 @@
         }
         .pad{
             padding: 10pt;
+        }
+
+        input{
+            margin: 2pt;
+            margin-left: 4pt;
+            color: wheat; background: black;
         }
 
         /* Main Footer */
@@ -157,8 +163,8 @@
 
 <!--<p style="text-align: center;font-size: 25pt;background: #e9c1e4;"><b><i>Top categories</i></b></p>-->
 <div class="menu">
-    <form th:method="POST" >
-        <input type="submit" value="Add new category" STYLE="color: wheat; background: black;"/>
+    <form th:method="GET" th:action="@{/category/create}" >
+        <input type="submit" value="Add new category" STYLE="color: wheat; background: black; margin: 10pt"/>
     </form>
     <div th:each="category: ${categoryList}"  class="frame">
         <img  th:src="${category.imageUrl}"  alt="..."   height="250" width="430" th:href="@{/product/{categoryId}(categoryId=${category.getId()})}">
@@ -166,6 +172,9 @@
         <b class="pad" style="font-size: 12pt">DESCRIPTION:</b> <p class="pad" th:text="${category.description}" style="font-size: 15pt"></p>
         <form th:method="POST" th:action="@{/category/delete/{id}(id = ${category.getId()})}">
             <input type="submit" value="Delete" STYLE="color: wheat; background: black;" />
+        </form>
+        <form th:method="GET" th:action="@{/category/update/{id}(id = ${category.getId()})}" >
+            <input type="submit" value="Update" STYLE="color: wheat; background: black;" />
         </form>
     </div>
 </div>

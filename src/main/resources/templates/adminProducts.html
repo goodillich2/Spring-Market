@@ -13,11 +13,10 @@
         html, body {
             padding: 0px;
             margin: 0px;
-            background: #e9c1e4;
+            background: white;
 
         }
 
-        }
 
         .menu {
             max-width: 100%;
@@ -34,6 +33,12 @@
         }
         .pad{
             padding: 10pt;
+        }
+
+        input{
+            margin: 2pt;
+            margin-left: 4pt;
+            color: wheat; background: black;
         }
 
         /* Main Footer */
@@ -137,7 +142,7 @@
 
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href="/admins">ADMIN TOOLS</a>
+                        <a class="nav-link" href="/auth/admin">ADMIN TOOLS</a>
                     </li>
                 </ul>
 
@@ -158,6 +163,9 @@
 
 
 <div class="menu">
+    <form th:method="GET" th:action="@{/product/add}" >
+        <input type="submit" value="Add new product" STYLE="color: wheat; background: black; margin: 10pt"/>
+    </form>
 <div th:each="product: ${products}" class="frame" >
 
     <img th:src=${product.imageURL}  alt="..."  width="400px" >
@@ -169,12 +177,16 @@
     <form th:method="POST" th:action="@{/product/delete/{id}(id = ${product.getId()})}">
         <input type="submit" value="Delete" STYLE="color: wheat; background: black;" />
     </form>
+    <form th:method="GET" th:action="@{/product/update/{id}(id = ${product.getId()})}">
+        <input type="submit" value="Update" STYLE="color: wheat; background: black;" />
+    </form>
 </div>
 </div>
+</div>
 
 
 
-    <!--<footer id="footer" class="footer-1">
+    <footer id="footer" class="footer-1">
         <div class="main-footer widgets-dark typo-light">
             <div class="container">
                 <div class="row">
@@ -251,7 +263,7 @@
                 </div>
             </div>
         </div>
-    </footer>-->
+    </footer>
 
 
 

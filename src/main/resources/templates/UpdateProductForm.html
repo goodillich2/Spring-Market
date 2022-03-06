@@ -5,30 +5,52 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
-    <link href="css/footer.css" rel="stylesheet">
     <style>
-        html, body{
-            padding: 0px;
-            margin: 0px;
-            background:  white;
+        .lab{
+            display: flex;
+            flex-direction:column;
+            padding: 2pt;
         }
 
+        input, label{
+            display:block;
+        }
+        label{
+            padding: 5pt;
+            font-size: 15pt;
+        }
+
+        input {
+            width:  600px;
+            height: 30px;
+            padding: 5px 10px 5px 10px;
+            border:1px solid #999;
+            font-size:16px;
+            font-family: Tahoma;
+        }
+
+        .inputButtom{
+            border:1px solid #999;
+
+        }
+        .modal{
+            padding: 50px;
+            background: #ccc;
+            border: 1px solid black;
+        }
         .menu {
             max-width: 100%;
             height: auto;
-            overflow:hidden
-        }
-        .frame{
-            float:left;
-            width: 30%;
-            height: 100%;
-            margin: 22px;
+            overflow:hidden;
             border: 1px solid black;
-            background: wheat;
+            padding-left: 300pt;
+            padding-right: 300pt;
+            padding-top: 50pt;
+            padding-bottom: 150pt;
         }
-        .pad{
-            padding: 10pt;
+        h1{
+            text-align:center ;
+            font-size: 25pt;
         }
 
         /* Main Footer */
@@ -111,63 +133,81 @@
 
     </style>
 </head>
-
 <body>
+
 <heder>
     <nav class="navbar navbar-expand-lg navbar navbar-dark bg-dark">
-    <div class="container-fluid">
-        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/category/list">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/about">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cart/">Cart</a>
-                </li>
-            </ul>
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/category/list">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/about">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/cart/">Cart</a>
+                    </li>
+                </ul>
 
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="hasAuthority('write')">
-                <li class="nav-item">
-                    <a class="nav-link" href="/auth/admin">ADMIN TOOLS</a>
-                </li>
-            </ul>
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" sec:authorize="hasAuthority('write')">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/auth/admin">ADMIN TOOLS</a>
+                    </li>
+                </ul>
 
-            </ul>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск">
-                <button class="btn btn-outline-success" type="submit">Search</button>
-                <authorize access="isAuthenticated()">
-                    <a class="nav-link" href="/auth/login">Login</a>
-                </authorize>
-                <a class="nav-link" href="/auth/logout">logout</a>
-            </form>
+                </ul>
+                <form class="d-flex">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Поиск">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                    <authorize access="isAuthenticated()">
+                        <a class="nav-link" href="/auth/login">Login</a>
+                    </authorize>
+                    <a class="nav-link" href="/auth/logout">logout</a>
+                </form>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
 </heder>
 
-
-
-
-
-<div style="padding-left: 0px">
-    <img src="https://vebrost.ru/upload/iblock/521/manage-loa1.jpg" alt="" width="1439px" height="500px">
-</div>
-
-<!--<p style="text-align: center;font-size: 25pt;background: #e9c1e4;"><b><i>Top categories</i></b></p>-->
 <div class="menu">
-    <div th:each="category: ${categoryList}"  class="frame">
-            <img  th:src="${category.imageUrl}"  alt="..."   height="250" width="430" th:href="@{/product/{categoryId}(categoryId=${category.getId()})}">
-            <p class="pad" style="font-size: 18pt"><a style="text-decoration: none" th:href="@{/product/{categoryId}(categoryId=${category.getId()})}" th:text="${category.getName()}"></a></p>
-            <b class="pad" style="font-size: 12pt">DESCRIPTION:</b> <p class="pad" th:text="${category.description}" style="font-size: 15pt"></p>
+    <form method="post"  th:action="@{/product/update/{id}(id = ${product.getId()})}" th:object="${product}">
+        <h1>Edit Product</h1>
+        <div class="lab">
+            <label for="name"> Product name</label>
+            <input type="text"  required="" id="name" name="name" th:value="${product.name}"/>
+        </div>
 
-    </div>
+        <div class="lab">
+            <label for="price">Product price</label>
+            <input type="text"  required="" id="price" name="price" th:value="${product.price}" />
+        </div>
+
+        <div class="lab">
+            <label for="description">Product description</label>
+            <input type="text"  required="" id="description" name="description" th:value="${product.description}" />
+        </div>
+        <div class="lab">
+            <label for="imageUrl">Product Image Url</label>
+            <input type="text"  required="" id="imageUrl" name="imageUrl" th:value="${product.imageURL}"/>
+        </div>
+        <div class="lab">
+            <label for="categoryId">Product category id</label>
+            <input type="text"  required="" id="categoryId" name="categoryId" th:value="${product.categoryId}"/>
+        </div>
+
+        <div>
+            <input type="hidden"   name="id" th:value="${product.id}"/>
+        </div>
+
+        <div class="lab">
+            <input type="submit" value="Update" style=" height: 30pt; width: 60pt; border-radius: 10pt; background-color: cornflowerblue; color: white; margin-top: 5pt"/>
+        </div>
+    </form>
 </div>
 
-<div>
+
 <footer id="footer" class="footer-1">
     <div class="main-footer widgets-dark typo-light">
         <div class="container">
@@ -246,8 +286,5 @@
         </div>
     </div>
 </footer>
-</div>
-
-
 </body>
 </html>

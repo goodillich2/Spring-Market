@@ -7,11 +7,11 @@ public class ProductDto {
     // for create it can be optional
     // for update we need the id
     private Integer id;
-    private @NotNull String name;
-    private @NotNull String imageURL;
-    private @NotNull double price;
-    private @NotNull String description;
-    private @NotNull Integer categoryId;
+    private  String name;
+    private  String imageURL;
+    private  double price;
+    private  String description;
+    private  Integer categoryId;
 
 
     public ProductDto() {
@@ -75,5 +75,22 @@ public class ProductDto {
                 ", description='" + description + '\'' +
                 ", categoryId=" + categoryId +
                 '}';
+    }
+
+    public ProductDto(Integer id, String name, String imageURL, double price, String description, Integer categoryId) {
+        this.id = id;
+        this.name = name;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
+    }
+
+    public ProductDto(String name, String imageURL, double price, String description, Integer categoryId) {
+        this.name = name;
+        this.imageURL = imageURL;
+        this.price = price;
+        this.description = description;
+        this.categoryId = categoryId;
     }
 }
